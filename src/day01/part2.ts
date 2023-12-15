@@ -1,5 +1,5 @@
 import { data, testData2 } from "./data";
-const wordNumMap = {
+const wordNumMap: Record<string, number> = {
   one: 1,
   two: 2,
   three: 3,
