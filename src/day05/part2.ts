@@ -12,6 +12,17 @@ const getSeedRanges = (seeds: number[]) => {
   return seedRanges;
 };
 
+const getSeedRangeIntersection = (
+  seedRangeA: [number, number],
+  seedRangeB: [number, number]
+) => {
+  const [startA, endA] = seedRangeA;
+  const [startB, endB] = seedRangeB;
+  const start = Math.max(startA, startB);
+  const end = Math.min(endA, endB);
+  return [start, end];
+};
+
 const processSeedRangesThroughAlmanac = (
   almanac: AlmanacEntry[],
   seedRanges: [number, number][]
@@ -61,5 +72,5 @@ console.log(processSeedRangesThroughAlmanac(almanacD, getSeedRanges(seedsD)));
 // Vague note to self:
 // This was a brute force attempt looking at the mappings of each seed in all ranges.
 // This took about 35 min to run on my machine. I think the better way would be to
-// somehow invert the logic so that we iterate over mappings to get ranges. Then we
-// can just take the lowest value of the lowest range.
+// somehow invert the logic so that we iterate over where the ranges intesect with
+// the almanac entries, to reduce the number of iterations we need to do.
